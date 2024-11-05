@@ -19,10 +19,10 @@ if ! grep -q "Up" "active.txt"; then
 fi
 
 # Listening ports on found addresses
-mapfile -t active_ip < <(awk '/Up$/{print $2}' active.txt)
+mapfile -t active_ip < <(awk '/Up$/{print $2}' "active.txt")
 
 echo "Listening ports on active IPs detection ..."
-for ip in "$(active_ip[@]}"; do
+for ip in "${active_ip[@]}"; do
   nmap -Pn "$ip" | grep "open" >> "services_$ip.txt"
 done
 
